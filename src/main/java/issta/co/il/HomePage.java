@@ -231,6 +231,8 @@ public class HomePage extends ConnectionPage {
         chooseDepartureAndReturnDate(chooseNumberOfDays);
         approvePassngerNumber();
         clickApproveAndFindMeAFlight(chooseNumberOfDays);
+        int openWindowsSize = driver.getWindowHandles().size();
+        moveToAnotherWindowByIndex(openWindowsSize);
     }
 
     // -------------------------------------------------------------- Assertions ------------------------------------------------------------
@@ -247,6 +249,30 @@ public class HomePage extends ConnectionPage {
     public boolean assertCurrentNavigationStatus(String currentNavigationBarName){
         String nameOfCurrentNavigationBar = getText(currentNavigationStatus);
         return nameOfCurrentNavigationBar.contains(currentNavigationBarName);
+    }
+
+    public boolean assertDatePickerVisible(){
+        WebElement datePicker = null;
+        try{
+            datePicker =  driver.findElement(By.cssSelector("[class='ng-form-row ng-datepicker-row two-month ng-form-datepicker-visible']"));
+        }catch (NoSuchElementException e){
+            System.out.println("Element Do not Exist");
+        }
+        return datePicker != null;
+    }
+
+    public boolean assertPassengerPickerWidgetIsOpen(){
+        WebElement passengerPickerWidget = null;
+        try{
+            passengerPickerWidget =  driver.findElement(By.cssSelector("[class='ng-dropdown ng-main-dropdown ng-dropdown-primary ng-passengers-dropdown ng-dropdown-open']"));
+        }catch (NoSuchElementException e){
+            System.out.println("Element Do not Exist");
+        }
+        return passengerPickerWidget != null;
+    }
+
+    public String getHomePageUrl(){
+        return getUrlAsString();
     }
 
 

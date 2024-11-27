@@ -1,6 +1,7 @@
 package issta.co.il;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -87,14 +88,13 @@ public class OrderInformationPage extends ConnectionPage {
      * It also checks that the user accepts the terms by clicking the checkbox before submitting the form.
      *
      * @param hebrewFirstName_Min2char The user's first name in Hebrew, must be at least 2 characters.
-     * @param hebrewLastName_Min2char The user's last name in Hebrew, must be at least 2 characters.
-     * @param email The user's email address, must contain "@" and ".".
-     * @param phoneNumber_only10char The user's phone number, must be exactly 9 characters long.
-     *
+     * @param hebrewLastName_Min2char  The user's last name in Hebrew, must be at least 2 characters.
+     * @param email                    The user's email address, must contain "@" and ".".
+     * @param phoneNumber_only10char   The user's phone number, must be exactly 9 characters long.
      * @throws IllegalArgumentException if any of the provided parameters do not meet the required criteria:
-     *         - First name or last name is less than 2 characters.
-     *         - Email does not contain "@" or ".".
-     *         - Phone number is not exactly 9 characters long.
+     *                                  - First name or last name is less than 2 characters.
+     *                                  - Email does not contain "@" or ".".
+     *                                  - Phone number is not exactly 9 characters long.
      */
 
     public void fillOrderInformationTab(String hebrewFirstName_Min2char, String hebrewLastName_Min2char, String email, String phoneNumber_only10char) {
@@ -144,7 +144,7 @@ public class OrderInformationPage extends ConnectionPage {
 
     /**
      * Fills out the passenger 1 information form with provided details and selects baggage options.
-     *--
+     * --
      * This method populates the passenger form fields such as first name, last name, gender, date of birth,
      * and selects baggage options. It validates the input for each field, ensuring that the first name and last name
      * in English have at least 2 characters, the gender is provided in Hebrew with a minimum length of 3 characters,
@@ -152,13 +152,12 @@ public class OrderInformationPage extends ConnectionPage {
      * It also checks and selects baggage options for the passenger if available.
      *
      * @param firstNameInEnglish_Min2char The first name of the passenger in English, must be at least 2 characters.
-     * @param lastNameInEnglish_Min2char The last name of the passenger in English, must be at least 2 characters.
-     * @param genderInHebrew The gender of the passenger in Hebrew, must be at least 3 characters.
-     * @param dateOfBirth The date of birth of the passenger in the format "dd/MM/yyyy".
-     *
+     * @param lastNameInEnglish_Min2char  The last name of the passenger in English, must be at least 2 characters.
+     * @param genderInHebrew              The gender of the passenger in Hebrew, must be at least 3 characters.
+     * @param dateOfBirth                 The date of birth of the passenger in the format "dd/MM/yyyy".
      * @throws IllegalArgumentException if any of the provided parameters do not meet the required criteria:
-     *         - First name or last name is less than 2 characters.
-     *         - Gender is less than 3 characters in Hebrew.
+     *                                  - First name or last name is less than 2 characters.
+     *                                  - Gender is less than 3 characters in Hebrew.
      */
 
     public void fillPassengers_1_InformationTab(String firstNameInEnglish_Min2char, String lastNameInEnglish_Min2char, String genderInHebrew, String dateOfBirth) {
@@ -199,13 +198,13 @@ public class OrderInformationPage extends ConnectionPage {
         //DateOfBirth is masked in the html - only one character at a time can be input into the field, loop through the characters and insert them one by one.
         char[] dateOfBirthChar = dateOfBirth.toCharArray();
         actions.moveToElement(firstPassengerDateOfBirthField).click();
-        for(char c : dateOfBirthChar){
+        for (char c : dateOfBirthChar) {
             actions.sendKeys(String.valueOf(c)).perform();
             sleepFor(100);
         }
         sleepFor(200);
         // only check the radio button that is not already selected, if there is no selection - skip.
-        for(WebElement element : firstPassengerBaggageSelectOptionList) {
+        for (WebElement element : firstPassengerBaggageSelectOptionList) {
             try {
                 if (!element.isSelected()) {
                     clickOn(element);
@@ -228,13 +227,12 @@ public class OrderInformationPage extends ConnectionPage {
      * It also checks and selects baggage options for the passenger if available.
      *
      * @param firstNameInEnglish_Min2char The first name of the second passenger in English, must be at least 2 characters.
-     * @param lastNameInEnglish_Min2char The last name of the second passenger in English, must be at least 2 characters.
-     * @param genderInHebrew The gender of the second passenger in Hebrew, must be at least 3 characters.
-     * @param dateOfBirth The date of birth of the second passenger in the format "dd/MM/yyyy".
-     *
+     * @param lastNameInEnglish_Min2char  The last name of the second passenger in English, must be at least 2 characters.
+     * @param genderInHebrew              The gender of the second passenger in Hebrew, must be at least 3 characters.
+     * @param dateOfBirth                 The date of birth of the second passenger in the format "dd/MM/yyyy".
      * @throws IllegalArgumentException if any of the provided parameters do not meet the required criteria:
-     *         - First name or last name is less than 2 characters.
-     *         - Gender is less than 3 characters in Hebrew.
+     *                                  - First name or last name is less than 2 characters.
+     *                                  - Gender is less than 3 characters in Hebrew.
      */
     public void fillPassengers_2_InformationTab(String firstNameInEnglish_Min2char, String lastNameInEnglish_Min2char, String genderInHebrew, String dateOfBirth) {
         waitFor(2);
@@ -274,14 +272,14 @@ public class OrderInformationPage extends ConnectionPage {
         Actions actions = new Actions(driver);
         //DateOfBirth is masked in the html - only one character at a time can be input into the field, loop through the characters and insert them one by one.
         char[] dateOfBirthChar = dateOfBirth.toCharArray();
-            actions.moveToElement(secondPassengerDateOfBirthField).click();
-        for(char c : dateOfBirthChar){
+        actions.moveToElement(secondPassengerDateOfBirthField).click();
+        for (char c : dateOfBirthChar) {
             actions.sendKeys(String.valueOf(c)).perform();
             sleepFor(100);
         }
         sleepFor(200);
         // only check the radio button that is not already selected, if there is no selection - skip.
-        for(WebElement element : secondPassengerBaggageSelectOptionList) {
+        for (WebElement element : secondPassengerBaggageSelectOptionList) {
             try {
                 if (!element.isSelected()) {
                     clickOn(element);
@@ -307,14 +305,14 @@ public class OrderInformationPage extends ConnectionPage {
      *
      * @throws IllegalStateException if there is an issue with clicking the radio button or the approval button.
      */
-    public void cancelExtraServices(){
+    public void cancelExtraServices() {
         waitFor(5);
         waitForListToLoad(cancelExtraServiceRadioBtnList);
         //click on the radio button with no added price.
         cancelExtraServiceRadioBtnList
                 .forEach(element -> {
-                    try{
-                        if(!element.isSelected()){
+                    try {
+                        if (!element.isSelected()) {
                             waitForElementToBeClickable(element);
                             clickOn(element);
                             sleepFor(3000);
@@ -344,7 +342,7 @@ public class OrderInformationPage extends ConnectionPage {
      *
      * @throws RuntimeException if there is an issue with the payment approval process, such as an element not being clickable.
      */
-    public void approvePayment(){
+    public void approvePayment() {
         waitFor(5);
         waitForElementToBeClickable(approveCheckBox);
         clickOn(approveCheckBox);
@@ -360,4 +358,25 @@ public class OrderInformationPage extends ConnectionPage {
         System.out.println("Test Complete");
     }
 
+
+    // ------------------------------------------------------------------ Assertions --------------------------------------------------
+
+    public String getOrderInformationPageUrl() {
+        sleepFor(5000);
+        waitUntilPageIsReady();
+        int openWindowsSize = driver.getWindowHandles().size();
+        moveToAnotherWindowByIndex(openWindowsSize);
+        return getUrlAsString();
+    }
+
+    public boolean isIframePaymentExist(){
+        sleepFor(2000);
+        WebElement iframe = null;
+        try{
+            iframe = driver.findElement(By.cssSelector("#form2"));
+        }catch (NoSuchElementException e){
+            System.out.println("Element iframe do not exist");
+        }
+        return iframe != null;
+    }
 }

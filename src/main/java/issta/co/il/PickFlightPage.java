@@ -93,4 +93,14 @@ public class PickFlightPage extends ConnectionPage {
         pickOneFlightFromList(chooseNumberOfDays);
     }
 
+    // ---------------------------------------------------------------- Assertions --------------------------------
+
+    public String getPickAFlightUrl(){
+        sleepFor(10000);
+        waitUntilPageIsReady();
+        int openWindowsSize = driver.getWindowHandles().size();
+        moveToAnotherWindowByIndex(openWindowsSize);
+        return getUrlAsString();
+    }
+
 }

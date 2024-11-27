@@ -52,4 +52,14 @@ public class ApproveFlightPage extends ConnectionPage {
         waitForElementToBeClickable(approveBtn);
         javaScriptClick(approveBtn);
     }
+
+    // ------------------------------------------------------------------------------ Assertions ------------------------------------------
+
+    public String getApproveFlightUrl(){
+        sleepFor(10000);
+        waitUntilPageIsReady();
+        int openWindowsSize = driver.getWindowHandles().size();
+        moveToAnotherWindowByIndex(openWindowsSize);
+        return getUrlAsString();
+    }
 }
